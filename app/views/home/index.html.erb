@@ -1,0 +1,15 @@
+<h1>Home#index</h1>
+
+<% if admin_signed_in? %>
+ <p>Welcome Admin</p>
+ <%= link_to 'Log out', destroy_admin_session_path, method: :delete %>
+ 
+<% elsif buyer_signed_in? %>
+<p>Welcome Buyer</p>
+<%= link_to 'Log out', destroy_buyer_session_path, method: :delete %>
+
+<% elsif broker_signed_in? %>
+<p>Welcome Broker</p>
+<%= link_to 'Log out', destroy_broker_session_path, method: :delete %>
+
+<% end %>
