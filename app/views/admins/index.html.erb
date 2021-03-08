@@ -14,7 +14,8 @@
         <td><%= user.name %></td>
         <td><%= user.type %></td>
         <td><%= user.email %></td>
-        <td> </td>
+        <td><%= link_to 'View User', admins_view_user_path(user.id) %> </td>
+        <td><%= link_to 'Edit User', admins_edit_user_path(user.id) %> </td>
       </tr>
     </tbody>
   <% end %>
