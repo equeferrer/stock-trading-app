@@ -9,7 +9,7 @@ RSpec.feature "AdminFeatures", type: :feature do
     click_button 'Log in'
   end
 
-  describe "GET /admin/dashboard" do
+  describe "GET /admins/dashboard" do
     it "1. should allow Admin to access Dashboard" do
       visit admins_dashboard_path
       within 'body' do
@@ -20,7 +20,7 @@ RSpec.feature "AdminFeatures", type: :feature do
     end
   end
 
-  describe "GET /admin/users" do
+  describe "GET admins/index" do
     it "2. should allow Admin to view all users" do
       visit admins_index_path
       within 'body' do
