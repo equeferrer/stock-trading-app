@@ -6,6 +6,7 @@ class AdminsController < ApplicationController
   end
 
   def index
+    @users = User.all
   end
 
   def new_user
@@ -19,5 +20,5 @@ class AdminsController < ApplicationController
   def is_admin?
     redirect_to root_path unless current_user.type == "Admin"
   end
-  
+
 end
