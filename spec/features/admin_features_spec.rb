@@ -9,7 +9,7 @@ RSpec.feature "AdminFeatures", type: :feature do
     click_button 'Log in'
   end
 
-  describe "GET /admins/dashboard" do
+  describe "Admin dashboard" do
     it "1. should allow Admin to access Dashboard" do
       visit admins_dashboard_path
       within 'body' do
@@ -20,7 +20,7 @@ RSpec.feature "AdminFeatures", type: :feature do
     end
   end
 
-  describe "GET admins/index" do
+  describe "Admin index" do
     it "2. should allow Admin to view all users" do
       visit admins_index_path
       within 'body' do
@@ -32,7 +32,7 @@ RSpec.feature "AdminFeatures", type: :feature do
     end
   end
 
-  describe 'user management' do
+  describe 'Admin user management' do
     it "3a. should allow Admin to add a Buyer" do
       visit admins_dashboard_path
       click_link 'New User'
@@ -42,7 +42,6 @@ RSpec.feature "AdminFeatures", type: :feature do
         fill_in 'Name', with: 'Buyer'
         fill_in 'Email', with: 'buyer@example.com'
         fill_in 'Password', with: 'secret'
-        fill_in 'Password confirmation', with: 'secret'
         fill_in 'Type', with: 'Buyer'
         click_button 'Create User'
       }.to change(Buyer, :count).by(1)
@@ -60,11 +59,9 @@ RSpec.feature "AdminFeatures", type: :feature do
         fill_in 'Name', with: 'Broker'
         fill_in 'Email', with: 'broker@example.com'
         fill_in 'Password', with: 'secret'
-        fill_in 'Password confirmation', with: 'secret'
-        fill_in 'Type', with: 'Buyer'
+        fill_in 'Type', with: 'Broker'
         click_button 'Create User'
-      }.to change(User, :count).by(1)
-      byebug
+      }.to change(Broker, :count).by(1)
 
       expect(current_path).to eq(admins_index_path)
       expect(page).to have_content 'broker@example.com'
@@ -77,12 +74,11 @@ RSpec.feature "AdminFeatures", type: :feature do
       
       expect{
         fill_in 'Name', with: 'Admin'
-        fill_in 'Email', with: 'broker@example.com'
+        fill_in 'Email', with: 'admin@example.com'
         fill_in 'Password', with: 'secret'
-        fill_in 'Password confirmation', with: 'secret'
         fill_in 'Type', with: 'Admin'
         click_button 'Create User'
-      }.to change(User, :count).by(1)
+      }.to change(Admin, :count).by(1)
       
       expect(current_path).to eq(admins_index_path)
       expect(page).to have_content 'admin@example.com'

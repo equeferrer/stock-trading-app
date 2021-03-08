@@ -1,2 +1,40 @@
-<h1>Admins#new_user</h1>
-<p>Find me in app/views/admins/new_user.html.erb</p>
+  <h1>New User</h1>
+
+  <%#= form_for(admins_new_user_path) do |f| %>
+  <%= form_with method: :post, scope: :user, url: admins_new_user_path , local:true do |f| %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="field">
+      <%= f.label :name %><br />
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :email %><br />
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password %>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
+    </div>
+    <div class="field">
+      <%= f.label :type %><br />
+      <%= f.password_field :type %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Create User" %>
+    </div>
+  <% end %>
