@@ -1,0 +1,23 @@
+<h1> View Users </h1>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% @users.each do |user| %>
+    <tbody>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.type %></td>
+        <td><%= user.email %></td>
+        <td><%= link_to 'View User', admins_view_user_path(user.id) %> </td>
+        <td><%= link_to 'Edit User', admins_edit_user_path(user.id) %> </td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
+<a href="<%= admins_new_user_path %>">New User</a>
