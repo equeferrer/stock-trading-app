@@ -16,10 +16,10 @@ class AdminsController < ApplicationController
   def create_user
     @user = User.new(user_params)
     if @user.save
-			redirect_to admins_index_path
-		else
-			render :new_user
-		end		
+      redirect_to admins_index_path
+    else
+      render :new_user
+    end		
   end
 
   def view_user
