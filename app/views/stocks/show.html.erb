@@ -1,0 +1,16 @@
+<h1>Stocks#show</h1>
+<p>Find me in app/views/stocks/show.html.erb</p>
+
+<h1> Current Price: <%= @stock.current_price %> </h1>
+<h2> Stock Symbol: <%= @stock.symbol %> </h2>
+<h2> Name: <%= @stock.name %> </h2>
+
+<% if broker_signed_in? %>
+
+Add this stock to my list
+
+<% elsif buyer_signed_in? %>
+
+List of Brokers + Buy Stock
+
+<% end %>
