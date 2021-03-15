@@ -2,11 +2,16 @@
 <p>Find me in app/views/stocks/show.html.erb</p>
 
 <h1> Current Price: <%= @stock.current_price %> </h1>
-<h2> Stock Symbol: <%= @stock.symbol %> </h2>
+<h2> Stock Symbol: <%= @stock.symbol.upcase %> </h2>
 <h2> Name: <%= @stock.name %> </h2>
 
 <% if buyer_signed_in? %>
-  <p> List of Brokers + Buy Stock </p>
+  <% if @stock.users %>
+    <h2> List of Brokers </h2>
+    <% @stock.users.each do |broker| %>
+      <p><%= broker.name %> Buy Stock </p>
+    <% end %>
+  <% end %>
 <% elsif broker_signed_in? %>
   <% if current_user.stocks.include?(@stock) %>
     <p> Added stock to list </p>
