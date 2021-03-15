@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_15_091513) do
-
-  create_table "broker_stocks", force: :cascade do |t|
-    t.integer "broker_id", null: false
-    t.integer "stock_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["broker_id"], name: "index_broker_stocks_on_broker_id"
-    t.index ["stock_id"], name: "index_broker_stocks_on_stock_id"
-  end
+ActiveRecord::Schema.define(version: 2021_03_15_105305) do
 
   create_table "stocks", force: :cascade do |t|
     t.string "symbol"
@@ -27,6 +18,15 @@ ActiveRecord::Schema.define(version: 2021_03_15_091513) do
     t.decimal "current_price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_stocks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "stock_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["stock_id"], name: "index_user_stocks_on_stock_id"
+    t.index ["user_id"], name: "index_user_stocks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,6 +48,6 @@ ActiveRecord::Schema.define(version: 2021_03_15_091513) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "broker_stocks", "brokers"
-  add_foreign_key "broker_stocks", "stocks"
+  add_foreign_key "user_stocks", "stocks"
+  add_foreign_key "user_stocks", "users"
 end

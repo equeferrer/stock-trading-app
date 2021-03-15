@@ -1,4 +1,5 @@
 class StocksController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_api
 
   def search
@@ -21,6 +22,13 @@ class StocksController < ApplicationController
     @stock = Stock.find(stock_id)
   end
 
+  def add
+    @stock = Stock.find(stock_id)
+    @stock.users << current_user
+    @stock.save
+    redirect_to stocks_show_path(@stock)  
+  end
+
   private 
 
   def get_api
@@ -37,5 +45,10 @@ class StocksController < ApplicationController
 
   def stock_id
     params[:id]
+  end
+
+  def has_stock?
+    @stock = Stock.find(stock_id)
+    current_user.stocks.include?(@stock)
   end
 end

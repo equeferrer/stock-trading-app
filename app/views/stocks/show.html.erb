@@ -5,12 +5,12 @@
 <h2> Stock Symbol: <%= @stock.symbol %> </h2>
 <h2> Name: <%= @stock.name %> </h2>
 
-<% if broker_signed_in? %>
-
-Add this stock to my list
-
-<% elsif buyer_signed_in? %>
-
-List of Brokers + Buy Stock
-
+<% if buyer_signed_in? %>
+  <p> List of Brokers + Buy Stock </p>
+<% elsif broker_signed_in? %>
+  <% if current_user.stocks.include?(@stock) %>
+    <p> Added stock to list </p>
+  <% else %>
+    <%= link_to "Add this stock to my list", stocks_add_path(@stock), method: :put, class: 'btn btn-success pull-right btn-sm'%>
+  <% end %>
 <% end %>
