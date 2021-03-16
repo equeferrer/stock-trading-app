@@ -5,6 +5,18 @@ RSpec.feature "StockFeatures", type: :feature do
   describe "Search and Add Stock" do
 
     it "1. should allow Buyer to search a stock" do
+      Broker.create(name: 'BROKER FOR AAL', email: 'b@test.com', password: "secret", password_confirmation: "secret")
+      visit new_broker_session_path
+      fill_in 'broker[email]', with: 'b@test.com'
+      fill_in 'broker[password]', with: 'secret'
+      click_button 'Log in'
+      visit stocks_search_path
+      fill_in 'symbol', with: 'AAL'
+      click_button 'Search'
+      click_link "Add this stock to my list"
+      visit root_path
+      click_link 'Log out'
+
       Buyer.create(name: 'new buyer', email: 'buyer@test.com', password: "secret", password_confirmation: "secret")
       visit new_buyer_session_path
       fill_in 'buyer[email]', with: 'buyer@test.com'
@@ -18,7 +30,7 @@ RSpec.feature "StockFeatures", type: :feature do
         expect(page).to have_content "Current Price"
         expect(page).to have_content "List of Brokers"
         expect(page).to have_content "Buy Stock"
-        expect(page).to have_content "test"
+        expect(page).to have_content "BROKER FOR AAL"
       end
     end
 
