@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   get 'home/index'
 
   # get 'stocks/add'
-  put 'stocks/add/:id' => 'stocks#add', as: 'stocks_add'
+  put 'stocks/broker/add/:id' => 'stocks#broker_add', as: 'stocks_broker_add'
+  get 'stocks/buyer/new/:id' => 'stocks#buyer_new', as: 'stocks_buyer_new'
+  post 'stocks/buyer/create/:id' => 'stocks#buyer_create', as: 'stocks_buyer_create'
 
   devise_for :admins
   devise_for :buyers

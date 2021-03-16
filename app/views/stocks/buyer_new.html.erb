@@ -1,0 +1,28 @@
+<h2>Buy new stock</h2>
+<%#= form_with scope:user_stock, url: stocks_buyer_create_path(user_stock), method: :post , local:true do |f| %>
+<%= form_with method: :post, url: stocks_buyer_create_path, local:true do |f| %>  
+  <div>
+    <p> Stock Symbol: <%= @stock.symbol  %> </p>
+    <p> <%= @stock.name %> </p>
+    <p> Broker: <%= @broker.name  %> </p>    
+  </div>
+
+  <div>
+    <%= f.label "Quantity" %>
+    <%= f.number_field :quantity, min: 1, step: 1 %>
+  </div>
+
+  <div>
+    <%= f.label "Current price" %>
+    <%= f.text_field :price, value: @stock.current_price, readonly:true %>
+  </div>
+
+  <div>
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>
+
+
+<% if @error %>
+  <%= @error %>
+<% end %>

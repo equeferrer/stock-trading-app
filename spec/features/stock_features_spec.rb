@@ -29,9 +29,19 @@ RSpec.feature "StockFeatures", type: :feature do
         expect(page).to have_content "Stock Symbol"
         expect(page).to have_content "Current Price"
         expect(page).to have_content "List of Brokers"
-        expect(page).to have_content "Buy Stock"
+        expect(page).to have_content "Buy from this broker"
         expect(page).to have_content "BROKER FOR AAL"
       end
+      click_link "Buy from this broker"
+      within 'body' do
+        expect(page).to have_content "Stock Symbol"
+        expect(page).to have_content "Current price"
+        expect(page).to have_content "Broker: BROKER FOR AAL"
+      end
+      expect{
+        fill_in 'quantity', with: 10
+        click_button "Submit"
+      }.to change(BuyerStock, :count).by(1)
     end
 
     it "2. should allow Broker to search a stock then add to list" do

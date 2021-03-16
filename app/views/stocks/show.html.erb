@@ -6,16 +6,18 @@
 <h2> Name: <%= @stock.name %> </h2>
 
 <% if buyer_signed_in? %>
-  <% if @stock.users %>
+
+  <% if @stock.user_stocks %>
     <h2> List of Brokers </h2>
-    <% @stock.users.each do |broker| %>
-      <p><%= broker.name %> Buy Stock </p>
+    <% @stock.user_stocks.each do | user_stock | %>
+      <p><%= user_stock.user.name %> <%= link_to "Buy from this broker", stocks_buyer_new_path(user_stock, @stock, user_stock.user), method: :get %></p>
     <% end %>
   <% end %>
+
 <% elsif broker_signed_in? %>
   <% if current_user.stocks.include?(@stock) %>
     <p> Added stock to list </p>
   <% else %>
-    <%= link_to "Add this stock to my list", stocks_add_path(@stock), method: :put, class: 'btn btn-success pull-right btn-sm'%>
+    <%= link_to "Add this stock to my list", stocks_broker_add_path(@stock), method: :put, class: 'btn btn-success pull-right btn-sm'%>
   <% end %>
 <% end %>

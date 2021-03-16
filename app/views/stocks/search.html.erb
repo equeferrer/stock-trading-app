@@ -13,3 +13,7 @@
     <%= f.submit "Search" %>
   </div>
 <% end %>
+
+<% if @error %>
+  <%= @error %>
+<% end %>
