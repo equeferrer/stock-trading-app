@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   get 'home/index'
   root "home#index"
+  get 'home/transactions'
   get 'portfolio/broker' => 'home#broker_portfolio', as: 'home_broker_portfolio'
   get 'portfolio/buyer' => 'home#buyer_portfolio', as: 'home_buyer_portfolio'
 

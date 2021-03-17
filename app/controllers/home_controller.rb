@@ -15,6 +15,22 @@ class HomeController < ApplicationController
     @stocks = current_user.stocks
   end
 
+  def transactions
+    if current_user.type == "Buyer"
+      @transactions = current_user.transactions
+      @method = "Bought"
+      @method_helper = "from"
+    elsif current_user.type == "Broker"
+      @transactions = Transaction.where(broker_id: current_user.id)
+      @method = "Sold"
+      @method_helper = "to"
+    elsif  current_user.type == "Admin"
+      @transactions = Transaction.all
+      @method = "bought"
+      @method_helper = "from"
+    end
+  end
+
   private
 
   def is_buyer?
