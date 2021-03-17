@@ -44,6 +44,10 @@ class StocksController < ApplicationController
     @buyer_stock.user_stock_id = @user_stock.id
       # user_stock.buyers << current_user
     if @buyer_stock.save
+      @transaction = current_user.transactions.create(stock_id:@stock.id, broker_id:@broker.id, quantity:@buyer_stock.quantity,
+                                                      price:@buyer_stock.price, total:(@buyer_stock.quantity * @buyer_stock.price))
+      byebug
+      @transaction.save
       redirect_to root_path
     else
       render :buyer_new
