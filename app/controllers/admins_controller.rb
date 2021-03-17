@@ -9,6 +9,10 @@ class AdminsController < ApplicationController
     @users = User.all
   end
 
+  def pending_approval
+    @users = User.where(approved: false)
+  end
+
   def new_user
     @user = User.new
   end
@@ -37,6 +41,17 @@ class AdminsController < ApplicationController
     else 
       render :edit_user
     end
+  end
+
+  def approve_user
+    user = User.find(set_user)
+    user.approved = true
+    if user.save
+      flash[:notice] = "#{user.name} approved"
+    else
+      flash[:alert] = "#{user.name} approval failure"
+    end
+    redirect_to admins_pending_approval_path
   end
 
   private

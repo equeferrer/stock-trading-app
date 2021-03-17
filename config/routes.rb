@@ -23,5 +23,7 @@ Rails.application.routes.draw do
   get 'admins/view/user/:id' => 'admins#view_user', as: 'admins_view_user'
   get 'admins/edit/user/:id' => 'admins#edit_user', as: 'admins_edit_user'
   put 'admins/edit/user/:id' => 'admins#update_user', as: 'admins_update_user'
+  get 'admins/pending' => 'admins#pending_approval', as: 'admins_pending_approval'
+  get 'admins/:id/approve'=> 'admins#approve_user', as: 'admins_approve_user'
 
 end

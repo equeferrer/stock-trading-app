@@ -7,4 +7,12 @@ class User < ApplicationRecord
 
   validates :name, presence:true       
   
+  def active_for_authentication? 
+    super && approved? 
+  end 
+  
+  def inactive_message 
+    approved? ? super : :not_approved
+  end
+
 end
