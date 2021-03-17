@@ -4,7 +4,9 @@ class Admin < User
   def send_admin_mail
     AdminMailer.new_user_waiting_for_approval(email).deliver
   end
-  
+
+  USER_TYPE_OPTIONS = ['Admin', 'Buyer', 'Broker']
+
 end
 
 
