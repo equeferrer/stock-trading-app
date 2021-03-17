@@ -7,15 +7,21 @@ class StocksController < ApplicationController
   end
 
   def create
-    @quote = @client.quote(stock_params)
-    @stock = Stock.find_or_create_by(symbol: params[:symbol],
+    begin
+      @quote = @client.quote(stock_params)
+      @stock = Stock.find_or_create_by(symbol: params[:symbol],
                                     name: @client.company(stock_params).company_name)
-    @stock.current_price = @quote.latest_price  
-    if @stock.save
-      redirect_to stocks_show_path(@stock)
-    else
+      @stock.current_price = @quote.latest_price  
+      if @stock.save
+        redirect_to stocks_show_path(@stock)
+      else
+        render :search
+      end
+    rescue IEX::Errors::SymbolNotFoundError # => e
+      flash[:alert] = "Stock symbol not valid"
       render :search
     end
+    
   end
   
   def show
@@ -42,7 +48,6 @@ class StocksController < ApplicationController
     @buyer_stock = BuyerStock.create(buyer_stock_params)
     @buyer_stock.user_id = current_user.id
     @buyer_stock.user_stock_id = @user_stock.id
-      # user_stock.buyers << current_user
     if @buyer_stock.save
       @transaction = current_user.transactions.create(stock_id:@stock.id, broker_id:@broker.id, quantity:@buyer_stock.quantity,
                                                       price:@buyer_stock.price, total:(@buyer_stock.quantity * @buyer_stock.price))
