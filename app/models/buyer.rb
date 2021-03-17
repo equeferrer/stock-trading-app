@@ -5,9 +5,13 @@ class Buyer < User
   has_many :transactions, foreign_key: :user_id
 
   before_create :approve_buyer
+  after_create :send_admin_mail
 
   def approve_buyer
     self.approved = true
   end
-  
+
+  def send_admin_mail
+    AdminMailer.account_approval(email).deliver
+  end
 end

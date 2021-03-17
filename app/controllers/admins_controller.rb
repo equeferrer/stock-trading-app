@@ -46,8 +46,10 @@ class AdminsController < ApplicationController
   def approve_user
     user = User.find(set_user)
     user.approved = true
+    @email = user.email
     if user.save
       flash[:notice] = "#{user.name} approved"
+      AdminMailer.account_approval(@email).deliver_now
     else
       flash[:alert] = "#{user.name} approval failure"
     end
