@@ -1,0 +1,10 @@
+<h1><%= current_user.name%>'s Portfolio</h1>
+<% @buyer_stocks.each do | buyer_stock | %>
+  <p><%= buyer_stock.user_stock.stock.name %> </p>
+  <p><%= buyer_stock.user_stock.stock.symbol.upcase %> </p>
+  <p>Price purchased: <%= buyer_stock.price %> </p>
+  <p># of Shares: <%= buyer_stock.quantity %> </p>
+  <p>Purchased at: <%= buyer_stock.created_at %> </p>
+  <p>Purchased from: <%= buyer_stock.user.name %> </p>
+  <%# can check if up or down %>
+<% end %>

@@ -1,20 +1,19 @@
 Rails.application.routes.draw do
-  get 'stocks/search'
-  post 'stocks/search' => 'stocks#create', as: 'stocks_create'
-
-  get 'stocks/show/:id' => 'stocks#show', as: 'stocks_show'
-  get 'home/index'
-
-  # get 'stocks/add'
-  put 'stocks/broker/add/:id' => 'stocks#broker_add', as: 'stocks_broker_add'
-  get 'stocks/buyer/new/:id' => 'stocks#buyer_new', as: 'stocks_buyer_new'
-  post 'stocks/buyer/create/:id' => 'stocks#buyer_create', as: 'stocks_buyer_create'
-
   devise_for :admins
   devise_for :buyers
   devise_for :brokers
 
+  get 'stocks/search'
+  post 'stocks/search' => 'stocks#create', as: 'stocks_create'
+  get 'stocks/show/:id' => 'stocks#show', as: 'stocks_show'
+  put 'stocks/broker/add/:id' => 'stocks#broker_add', as: 'stocks_broker_add'
+  get 'stocks/buyer/new/:id' => 'stocks#buyer_new', as: 'stocks_buyer_new'
+  post 'stocks/buyer/create/:id' => 'stocks#buyer_create', as: 'stocks_buyer_create'
+
+  get 'home/index'
   root "home#index"
+  get 'portfolio/broker' => 'home#broker_portfolio', as: 'home_broker_portfolio'
+  get 'portfolio/buyer' => 'home#buyer_portfolio', as: 'home_buyer_portfolio'
 
   get 'admins/dashboard'
   get 'admins/index'
