@@ -2,16 +2,18 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  config.action_mailer.delivery_method=:smtp 
+  config.action_mailer.raise_delivery_errors = true
+
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: "example.com",
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password:ENV["GMAIL_PASSWORD"]
+    :user_name => 'b2e341ea55ffd4',
+    :password => '5b9a1e61407b89',
+    :address => 'smtp.mailtrap.io',
+    :domain => 'smtp.mailtrap.io',
+    :port => '2525',
+    :authentication => :cram_md5
   }
-  # config.action_mailer.default_url_options = { :host => 'eque-workday.herokuapp.com' }
+  config.action_mailer.default_url_options = { :host => 'eque-stocksapp.herokuapp.com' }
 
   # Code is not reloaded between requests.
   config.cache_classes = true
