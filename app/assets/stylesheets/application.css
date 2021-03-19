@@ -43,7 +43,7 @@ body{
   /* background-image: linear-gradient(to right top, #506680, #2F4562); */
   /* background-image: linear-gradient(to right top, #008793, #00bf72, #a8eb12); */
   /* background-image: linear-gradient(to left top, #d16ba5, #c45da5, #b64fa6, #a443a7, #9039aa, #8335a8, #7631a6, #682da4, #632b9c, #5e2995, #5a278d, #552586); */
-  color: black !important;
+  color: white !important;
   text-decoration: none;
   height: 200px;
   width: 600px;
@@ -69,7 +69,7 @@ body{
   /* background-color: #00B8D9; */
   background-image: linear-gradient(to right top, #00B8D9, #00A8CC );
   /* background-image: linear-gradient(to left top, #d16ba5, #c45da5, #b64fa6, #a443a7, #9039aa, #8335a8, #7631a6, #682da4, #632b9c, #5e2995, #5a278d, #552586); */
-  color: black !important;
+  color: white !important;
   text-decoration: none;
   height: 150px;
   width: 250px;
