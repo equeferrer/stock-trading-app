@@ -7,10 +7,18 @@
     <p> Price as of: <b><%= @stock.updated_at.strftime('%I:%M %p, %b. %e, %Y')%> </b> </p>
 
     <br>
-    High: <%= number_to_currency(@stock.ohlc_high) %> <br>
-    Low: <%= number_to_currency(@stock.ohlc_low) %> <br>
-    Previous Close: <%= number_to_currency(@stock.ohlc_close) %> <br>
-    Open: <%= number_to_currency(@stock.ohlc_open) %><br>
+    <% if !(@stock.ohlc_high.nil?)%>
+      High: <%= number_to_currency(@stock.ohlc_high) %> <br>
+    <% end %>
+    <% if !(@stock.ohlc_high.nil?)%>
+      Low: <%= number_to_currency(@stock.ohlc_low) %> <br>
+    <% end %>
+    <% if !(@stock.ohlc_high.nil?)%>
+      Previous Close: <%= number_to_currency(@stock.ohlc_close) %> <br>
+    <% end %>
+    <% if !(@stock.ohlc_high.nil?)%>
+      Open: <%= number_to_currency(@stock.ohlc_open) %><br>
+    <% end %>
   </div>
 
   <% if buyer_signed_in? %>

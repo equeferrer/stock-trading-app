@@ -12,7 +12,7 @@ class StocksController < ApplicationController
       @stock = Stock.find_or_create_by(symbol: params[:symbol],
                                     name: @client.company(stock_params).company_name)
       @ohlc = @client.ohlc(stock_params)
-      if @ohlc.close.price.exists?
+      if @ohlc.include?("close")
         @stock.ohlc_close = @ohlc.close.price
         @stock.ohlc_open = @ohlc.open.price
         @stock.ohlc_high = @ohlc.high
