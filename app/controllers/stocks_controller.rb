@@ -66,7 +66,8 @@ class StocksController < ApplicationController
       @transaction = current_user.transactions.create(stock_id:@stock.id, broker_id:@broker.id, quantity:@buyer_stock.quantity,
                                                       price:@buyer_stock.price, total:(@buyer_stock.quantity * @buyer_stock.price))
       @transaction.save
-      redirect_to root_path
+      flash[:notice] = "Successfully purchased #{@buyer_stock.quantity} shares of #{@stock.symbol.upcase}"
+      redirect_to home_transactions_path
     else
       render :buyer_new
     end
