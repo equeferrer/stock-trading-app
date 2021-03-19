@@ -1,6 +1,6 @@
 class StocksController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_api
+  before_action :get_api, only: [:create, :search]
 
   def search
     @stock = Stock.new
@@ -11,21 +11,35 @@ class StocksController < ApplicationController
       @quote = @client.quote(stock_params)
       @stock = Stock.find_or_create_by(symbol: params[:symbol],
                                     name: @client.company(stock_params).company_name)
+      @ohlc = @client.ohlc(stock_params)
+      if @ohlc
+        @stock.ohlc_close = @ohlc.close.price
+        @stock.ohlc_open = @ohlc.open.price
+        @stock.ohlc_high = @ohlc.high
+        @stock.ohlc_low = @ohlc.low
+      end
       @stock.current_price = @quote.latest_price  
+      @stock.change = @quote.change
+      @stock.percent = @quote.change_percent_s
       if @stock.save
         redirect_to stocks_show_path(@stock)
       else
         render :search
       end
-    rescue IEX::Errors::SymbolNotFoundError # => e
-      flash[:alert] = "Stock symbol not valid"
-      render :search
+    rescue IEX::Errors::SymbolNotFoundError => e
+      flash[:alert] = e.message # "Stock symbol not valid"
+      redirect_to stocks_search_path
     end
     
   end
   
   def show
     @stock = Stock.find(stock_id)
+    if @stock.percent.include?("-")
+      @gain_loss = "loss"
+    else
+      @gain_loss = "gain"
+    end
   end
 
   def broker_add

@@ -1,7 +1,7 @@
-<h1>View User</h1>
-
 <h3> Name: <%= @user.name %> </h3>
 <h3> Email: <%= @user.email %> </h3>
 <h3> Type: <%= @user.type %> </h3>
-<h3> Transactions: <%#%> </h3>
 <h4> <%= link_to 'Edit User', admins_edit_user_path(@user.id) %> </h4>
+<% if @user.approved == false%>
+  <h4> <%= link_to "Approve User", admins_approve_user_path(@user.id)  %>  </h4>
+<% end %>

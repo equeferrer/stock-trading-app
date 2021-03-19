@@ -1,10 +1,12 @@
-<h1> View Users </h1>
-<table>
+<h1> All Users </h1>
+<table class="table table-dark table-hover table-sm">
   <thead>
     <tr>
       <th scope="col">Name</th>
       <th scope="col">Type</th>
-      <th scope="col">Email</th>
+      <th scope="col">Email</th>  
+      <th scope="col">Status</th>    
+      <th></th>
       <th></th>
     </tr>
   </thead>
@@ -14,10 +16,12 @@
         <td><%= user.name %></td>
         <td><%= user.type %></td>
         <td><%= user.email %></td>
-        <td><%= link_to 'View User', admins_view_user_path(user.id) %> </td>
+        <td><span style="color:var(--bs-warning)"><%= "Pending" unless user.approved == true%> </span></td>
+        <td><%= link_to 'View User', admins_view_user_path(user.id) %> </td> 
         <td><%= link_to 'Edit User', admins_edit_user_path(user.id) %> </td>
       </tr>
     </tbody>
   <% end %>
 </table>
-<a href="<%= admins_new_user_path %>">New User</a>
+<a class="btn btn-light" href="<%= admins_new_user_path %>">Create New User</a> 
+<%= link_to 'Users pending approval', admins_pending_approval_path, class:"btn btn-light" %>

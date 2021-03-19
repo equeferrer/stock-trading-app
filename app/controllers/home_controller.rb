@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:buyer_portfolio, :broker_portfolio, :transactions]
   before_action :is_buyer?, only: [:buyer_portfolio]
   before_action :is_broker?, only: [:broker_portfolio]
 
@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   end
 
   def buyer_portfolio
-    @buyer_stocks = current_user.buyer_stocks
+    @buyer_stocks = current_user.user_stocks
   end
 
   def broker_portfolio

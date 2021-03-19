@@ -1,0 +1,62 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid container">
+    <div class="flex d-flex justify-content-between">
+      <a class="navbar-brand mx-3" href="#"><b>StocksApp</b></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+          <% if admin_signed_in? %>
+
+            <li class="nav-item">
+              <%= link_to 'Home', root_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Transactions', home_transactions_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Manage Users', admins_index_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Log out', destroy_admin_session_path, class:"nav-link", method: :delete %>
+            </li>
+
+          <% elsif buyer_signed_in? %>
+
+            <li class="nav-item">
+              <%= link_to 'Home', root_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Transactions', home_transactions_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'My Portfolio', home_buyer_portfolio_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Log out', destroy_buyer_session_path, class:"nav-link", method: :delete %>
+            </li>
+
+          <% elsif broker_signed_in? %>
+
+            <li class="nav-item">
+              <%= link_to 'Home', root_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Transactions', home_transactions_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'My Portfolio', home_broker_portfolio_path , class:"nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Log out', destroy_broker_session_path, class:"nav-link", method: :delete %>
+            </li>
+
+          <% end %>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -16,7 +16,6 @@ Rails.application.routes.draw do
   get 'portfolio/broker' => 'home#broker_portfolio', as: 'home_broker_portfolio'
   get 'portfolio/buyer' => 'home#buyer_portfolio', as: 'home_buyer_portfolio'
 
-  get 'admins/dashboard'
   get 'admins/index'
   get 'admins/new/user'  => 'admins#new_user',   as: 'admins_new_user'
   post 'admins/new/user' => 'admins#create_user', as: 'admins_create_user'

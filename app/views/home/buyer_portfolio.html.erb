@@ -1,10 +1,15 @@
-<h1><%= current_user.name%>'s Portfolio</h1>
-<% @buyer_stocks.each do | buyer_stock | %>
-  <p><%= buyer_stock.user_stock.stock.name %> </p>
-  <p><%= buyer_stock.user_stock.stock.symbol.upcase %> </p>
-  <p>Price purchased: <%= buyer_stock.price %> </p>
-  <p># of Shares: <%= buyer_stock.quantity %> </p>
-  <p>Purchased at: <%= buyer_stock.created_at %> </p>
-  <p>Purchased from: <%= buyer_stock.user.name %> </p>
-  <%# can check if up or down %>
-<% end %>
+<h1> <%= current_user.name%>'s Portfolio</h1> <br>
+
+<div class="flex d-flex flex-wrap">
+  <% @buyer_stocks.group(:stock_id).sum(:quantity).each do |id, sum| %> 
+    <div class="stock--card"> 
+      <div class="p-0 stock--column">
+        <% stock = Stock.find(id) %>
+        <p class="p-0 text-center"> <b> <u> <%= stock.name %>(<%= stock.symbol.upcase %>) </u> </b> </p>
+        <p>  Total Shares: <%= sum %> <br>
+          Current Price: <%= number_to_currency(stock.current_price.to_f) %> <br>
+          Current Value: <%= number_to_currency(stock.current_price.to_f * sum) %></p>
+      </div>
+    </div>
+  <% end %>
+</div>

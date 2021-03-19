@@ -1,15 +1,56 @@
-<h1>Home#index</h1>
-
 <% if admin_signed_in? %>
- <p>Welcome Admin</p>
- <%= link_to 'Log out', destroy_admin_session_path, method: :delete %>
- 
+  <%= render 'admins/dashboard' %>
+  
 <% elsif buyer_signed_in? %>
-<p>Welcome Buyer</p>
-<%= link_to 'Log out', destroy_buyer_session_path, method: :delete %>
-
+  <div class="d-flex flex-row flex-wrap mb-5">
+    <a href="<%= stocks_search_path %>" class="dashboard--card"> 
+      <div>
+        <div class="p-2 mt-3 mx-2 dashboard--column">
+          <h3 class="p-0 text-center"> <b>Search Stocks</b> </h3>
+        </div>
+      </div>
+    </a>
+    <a href="<%= home_transactions_path %>" class="dashboard--card"> 
+      <div>
+        <div class="p-2 mt-3 mx-2 dashboard--column">
+          <h3 class="p-0 text-center"><b> My Transactions </b></h3>
+        </div>
+      </div>
+    </a>
+    <a href="<%= home_buyer_portfolio_path %>" class="dashboard--card"> 
+      <div>
+        <div class="p-2 mt-3 mx-2 dashboard--column">
+          <h3 class="p-0 text-center"> <b>My Portfolio</b></h3>
+        </div>
+      </div>
+    </a>
+  </div>
 <% elsif broker_signed_in? %>
-<p>Welcome Broker</p>
-<%= link_to 'Log out', destroy_broker_session_path, method: :delete %>
 
+  <div class="d-flex flex-row flex-wrap mb-5">
+    <a href="<%= stocks_search_path %>" class="dashboard--card"> 
+      <div>
+        <div class="p-2 mt-3 mx-2 dashboard--column">
+          <h3 class="p-0 text-center"> Search Stocks </h3>
+        </div>
+      </div>
+    </a>
+    <a href="<%= home_transactions_path %>" class="dashboard--card"> 
+      <div>
+        <div class="p-2 mt-3 mx-2 dashboard--column">
+          <h3 class="p-0 text-center"> My Transactions </h3>
+        </div>
+      </div>
+    </a>
+    <a href="<%= home_broker_portfolio_path %>" class="dashboard--card"> 
+      <div>
+        <div class="p-2 mt-3 mx-2 dashboard--column">
+          <h3 class="p-0 text-center"> My Portfolio</h3>
+        </div>
+      </div>
+    </a>
+  </div>
+
+<% else %>
+  <%= render 'home/home_page' %>
 <% end %>
