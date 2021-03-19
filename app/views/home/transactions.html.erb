@@ -1,0 +1,37 @@
+<div class="container">
+  <% if !(current_user.type == "Admin") %>
+    
+    <h1><%= current_user.name%>'s Transactions</h1> <br>
+    <% @transactions.each do | transaction | %>
+      <details>
+        <summary>
+          <%= @method %> <%= transaction.quantity %> stocks (<%= Stock.find(transaction.stock_id).symbol.upcase %>) <%= @method_helper %> 
+          <% if current_user.type == "Buyer" %>
+            <%= Broker.find(transaction.broker_id).name %> at $<%= transaction.price%>/stock
+          <% elsif current_user.type == "Broker" %>
+            <%= transaction.user.name %> at <%= number_to_currency(transaction.price)%>/stock
+          <% end %>
+          <small class="mx-5"> <i><%= time_ago_in_words(transaction.created_at)%> ago </i></small>  
+        </summary>
+        <p class="mx-5"> Transaction ID: <%= transaction.id %> <br>
+        Total: <%= number_to_currency(transaction.total) %><br>
+        Transaction Date: <%= transaction.created_at.strftime('%b. %e, %Y, %I:%M %p') %> </p>
+      </details> <hr>
+    <% end %>
+
+  <% else %>
+
+    <h1> All Transactions </h1>
+    <% @transactions.each do | transaction | %>
+      <details>
+        <summary>
+          <%= transaction.user.name %> <%= @method %> <%= transaction.quantity %> stocks (<%= Stock.find(transaction.stock_id).symbol.upcase %>) 
+          <%= @method_helper %> <%= Broker.find(transaction.broker_id).name %> at <%= number_to_currency(transaction.price)%>/stock
+          <small class="mx-5"><i><%= time_ago_in_words(transaction.created_at)%> ago</i></small>  
+        </summary>
+        <p class="mx-5"> Transaction ID: <%= transaction.id %> <br>
+        Total: <%= number_to_currency(transaction.total) %><br>
+        Transaction Date: <%= transaction.created_at.strftime('%b. %e, %Y, %I:%M %p') %> </p>
+      </details> <hr>
+    <% end %>
+  <% end %>

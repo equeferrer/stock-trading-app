@@ -34,9 +34,9 @@
     
     <div class="field">
       <%= f.label :type %><br />
-      <%= f.password_field :type %>
+      <%= f.select :type, Admin::USER_TYPE_OPTIONS %>
     </div>
-    
+
     <div class="actions">
       <%= f.submit "Create User" %>
     </div>

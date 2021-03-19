@@ -1,0 +1,22 @@
+<h1> Pending Approval </h1>
+<table class="table table-dark table-hover table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Type</th>
+      <th scope="col">Email</th>
+      <th></th>
+    </tr>
+  </thead>
+  <% @users.each do |user| %>
+    <tbody>
+      <tr>
+        <td><%= user.name %></td>
+        <td><%= user.type %></td>
+        <td><%= user.email %></td>
+        <td> <%= link_to "Approve User", admins_approve_user_path(user.id)  %> </td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>
+<a class="btn btn-light" href="<%= admins_new_user_path %>">Create New User</a>

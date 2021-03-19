@@ -1,0 +1,40 @@
+<div class="flex d-flex">
+  <div class="col-6">
+    <h2> <%= @stock.name %> [<%= @stock.symbol.upcase %>]</h2>
+    <h1> <b><%= number_to_currency(@stock.current_price) %> </b> 
+          <small class="small-stock-price stock-<%=@gain_loss%>"><%= number_to_currency(@stock.change) %><i>(<%= @stock.percent %>)</i></small> 
+    </h1>
+    <p> Price as of: <b><%= @stock.updated_at.strftime('%I:%M %p, %b. %e, %Y')%> </b> </p>
+
+    <br>
+    High: <%= number_to_currency(@stock.ohlc_high) %> <br>
+    Low: <%= number_to_currency(@stock.ohlc_low) %> <br>
+    Previous Close: <%= number_to_currency(@stock.ohlc_close) %> <br>
+    Open: <%= number_to_currency(@stock.ohlc_open) %><br>
+  </div>
+
+  <% if buyer_signed_in? %>
+
+    <% if @stock.users.present? %>
+      <div class="col-6">
+        <h2> List of Brokers </h2>
+        <% @stock.user_stocks.each do | user_stock | %>
+          <p><%= user_stock.user.name %> <%= link_to "Buy from this broker", stocks_buyer_new_path(user_stock, @stock, user_stock.user), method: :get, class: 'btn btn-success btn-sm' %></p>
+        <% end %>
+      </div>
+    <% end %>
+    
+   <% elsif broker_signed_in? %>
+      <div class="col-6">
+        <% if current_user.stocks.include?(@stock) %>
+          <p style="color:var(--bs-success)" class="check">&#x2714;	You have already added this stock to your list </p>
+        <% else %>
+          <%= link_to "Add this stock to my list", stocks_broker_add_path(@stock), method: :put, class: 'btn btn-success btn-sm'%>
+        <% end %>
+      </div>
+    <% end %>
+</div>
+
+
+
+   

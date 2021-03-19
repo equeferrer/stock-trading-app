@@ -1,0 +1,32 @@
+<% @pending = User.where(approved:false) %>
+<div class="d-flex flex-row flex-wrap mb-5">
+  <a href="<%= admins_index_path %>" class="dashboard--card"> 
+    <div>
+      <div class="p-2 mt-3 mx-2 dashboard--column">
+        <h3 class="p-0 text-center"><b> All Users</b> </h3>
+      </div>
+    </div>
+  </a>
+  <a href="<%= home_transactions_path %>" class="dashboard--card"> 
+    <div>
+      <div class="p-2 mt-3 mx-2 dashboard--column">
+        <h3 class="p-0 text-center"><b> All Transactions</b> </h3>
+      </div>
+    </div>
+  </a>
+  <a href="<%= admins_new_user_path %>" class="dashboard--card"> 
+    <div>
+      <div class="p-2 mt-3 mx-2 dashboard--column">
+        <h3 class="p-0 text-center"> <b>Create New User </b></h3>
+      </div>
+    </div>
+  </a>
+  <a href="<%= admins_pending_approval_path %>" class="dashboard--card"> 
+    <div>
+      <div class="p-2 mt-3 mx-2 dashboard--column">
+        <h3 class="p-0 text-center"><b>Pending Users </b> <h3>
+        <p class="p-0 text-center"> There are <%= @pending.count %> new pending users</p>
+      </div>
+    </div>
+  </a>
+</div>

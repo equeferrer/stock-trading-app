@@ -1,0 +1,19 @@
+<h1> <%= current_user.name%>'s Portfolio</h1>
+<table class="table table-dark table-hover table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Stock</th>
+      <th scope="col">Symbol</th>  
+      <th scope="col">Date Added</th>    
+    </tr>
+  </thead>
+  <% @stocks.each do | stock | %>
+    <tbody>
+      <tr>
+        <td><%= stock.name %></td>
+        <td><%= stock.symbol.upcase %> </td>
+        <td><%= stock.created_at.strftime('%b. %e, %Y, %I:%M %p') %> </td>
+      </tr>
+    </tbody>
+  <% end %>
+</table>

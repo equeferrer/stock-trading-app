@@ -1,0 +1,18 @@
+<div class="flex d-flex">
+  <div class="col-6 mt-3">
+    <h1><b>STOCKAPP BUYERS</b></h1> <br>
+    <h4>Easily search and buy stocks <br> from different brokers with <u class="workday"><b>StockApp</b></u></h1> 
+    <p><i>We help you organize your portfolio and transactions!</i></p> <br>
+    <%= link_to "Sign In as Buyer", new_buyer_session_path, class:"btn btn-light"%>
+    <%= link_to "Sign Up as Buyer", new_buyer_registration_path, class:"btn btn-header"%>
+  </div>
+
+
+  <div class="col-6 gray-header">
+    <h1><b>STOCKAPP BROKERS</b></h1><br>
+    <h4>Easily manage your stock portfolio <br> and transactions with <u class="workday"><b>StockApp</b></u></h1> 
+    <br> <br>
+    <%= link_to "Sign In as Broker", new_broker_session_path, class:"btn btn-light"%>
+    <%= link_to "Sign Up as Broker", new_broker_registration_path, class:"btn btn-header"%>
+  </div>
+</div>

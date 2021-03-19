@@ -1,0 +1,45 @@
+<h2 class = "">Search Stock</h2>
+
+<%= form_with method: :post, url: stocks_search_path , local:true do |f| %>  
+  <div class="flex d-flex">
+    <div class="field">
+      <%#= f.label :symbol %>
+      <%= f.text_field :symbol %>
+    </div>
+        
+    <div class="actions">
+      <%= f.submit "Search" %>
+    </div>
+  </div>
+<% end %>
+
+<br> <br>
+<% @list = @client.stock_market_list(:mostactive) %>
+
+<h3> <b> <u> Most Active Stocks Today </u><b> </h3>
+<div>
+  <div class="flex d-flex flex-wrap">
+    <% @list.each do | active_stock | %> 
+      <% @gain_loss = "loss" if active_stock.change_percent_s.include?("-")%>
+      <% @gain_loss = "gain" if active_stock.change_percent_s.include?("+")%>
+      <div class="active--stock--card active--<%= @gain_loss%>"> 
+        <div class="p-0 active--stock--column">
+          <h3 class="p-0 text-center flex d-flex justify-content-between"> 
+            <div> <b> <%= active_stock.symbol %> </b> </div>
+            <div><b> <%= number_to_currency(active_stock.latest_price) %> </b></div> 
+          </h3> <br>
+          <p> <small> Volume: <%= number_with_delimiter(active_stock.avg_total_volume, :delimiter => ',') %></small> </p>
+          <p> <small> Change: <%= active_stock.change_percent_s %></small> </p>
+          <% if !(active_stock.low.blank?) %>
+            <p> <small> Low: <%= active_stock.low %> </small> </p>
+            <p> <small> Open: <%= active_stock.open %></small> </p>
+          <% end %>
+          <p> <small> Prev. Close: <%= active_stock.previous_close %></small> </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
