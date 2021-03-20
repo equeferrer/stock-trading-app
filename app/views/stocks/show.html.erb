@@ -4,7 +4,7 @@
     <h1> <b><%= number_to_currency(@stock.current_price) %> </b> 
           <small class="small-stock-price stock-<%=@gain_loss%>"><%= number_to_currency(@stock.change) %><i>(<%= @stock.percent %>)</i></small> 
     </h1>
-    <p> Price as of: <b><%= @stock.updated_at.strftime('%I:%M %p, %b. %e, %Y')%> </b> </p>
+    <p> Price as of: <b><%= @stock.updated_at.httpdate%> </b> </p>
 
     <br>
     <% if !(@stock.ohlc_high.nil?)%>

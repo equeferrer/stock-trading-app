@@ -15,7 +15,7 @@
         </summary>
         <p class="mx-5"> Transaction ID: <%= transaction.id %> <br>
         Total: <%= number_to_currency(transaction.total) %><br>
-        Transaction Date: <%= transaction.created_at.strftime('%b. %e, %Y, %I:%M %p') %> </p>
+        Transaction Date: <%= transaction.created_at.httpdate %> </p>
       </details> <hr>
     <% end %>
 
