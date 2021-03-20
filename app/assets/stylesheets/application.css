@@ -176,3 +176,7 @@ summary{
   margin-left:10px;
   margin-right:4px;
 }
+
+input#symbol {
+  text-transform: uppercase;
+}
